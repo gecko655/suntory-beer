@@ -1,6 +1,7 @@
-# everyday-birthday
+# suntory-beer
 
-Twitterの誕生日を毎日0時に変更して、毎日風船を飛ばすやつ
+サントリーのビール抽選に複垢で応募するやつ
+（実装中）
 
 ## 動作確認環境
 - Docker 1.9.1
@@ -9,26 +10,8 @@ Twitterの誕生日を毎日0時に変更して、毎日風船を飛ばすやつ
 たぶんDockerさえ動けばなんとかなる
 
 ## 使い方 (From docker hub)
-```bash
-$ curl https://raw.githubusercontent.com/gecko655/everyday-birthday/master/secretenv.template > secretenv
-$ vi secretenv
-# TwitterID=gecko655
-# Password=yourpasswordgoeshere
-# Year=19xx
-$ docker run -d --name selenium-standalone -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
-$ docker run -d --name everyday-birthday --env-file secretenv -e Hostserver_Hostname=`hostname` gecko655/everyday-birthday
-```
+あとで書く
 
 ## 使い方（From source)
-```bash
-$ git clone git@github.com:gecko655/everyday-birthday.git
-$ cp secretenv.template secretenv
-$ vi secretenv
-# TwitterID=gecko655
-# Password=yourpasswordgoeshere
-# Year=19xx
-$ ./build.sh
-$ ./run_selenium_webdriver.sh # seleniumのDockerイメージが立ち上がる
-$ ./run.sh #毎日0時にスクリプトを動かすDockerイメージが立ち上がる
-```
+あとで書く
 
