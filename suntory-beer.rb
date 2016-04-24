@@ -33,6 +33,8 @@ begin
   driver.find_element(:id => "text_length").send_keys apply_comment
   driver.find_element(:class => "fade").find_element(:tag_name => "button").click
 
+  sleep 3
+
   logger.info("Confirm")
   driver.find_element(:class => "fade").find_element(:tag_name => "button").click
 
