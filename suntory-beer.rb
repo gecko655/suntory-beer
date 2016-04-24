@@ -6,7 +6,7 @@ logger = Logger.new(STDOUT)
 hostname = ENV["Hostserver_Hostname"]
 twitterID = ENV["TwitterID"]
 password = ENV["Password"]
-apply_comment = ENV["ApplyComment"]
+apply_comment = "香風智乃さん"
 
 logger.info("Initializing")
 driver = Selenium::WebDriver.for :remote, :url => "http://"+hostname+":4444/wd/hub", :desired_capabilities => :chrome
