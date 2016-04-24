@@ -17,7 +17,7 @@ begin
   driver.navigate.to "https://premiumcp-coupon.jp/kaoruale/attestation.html"
 
   logger.info("age check")
-  twenty_button = driver.find_element(:class => "age")
+  twenty_button = driver.find_element(:class => "ade")
   twenty_button.click
 
   logger.info("Select twitter to apply")
