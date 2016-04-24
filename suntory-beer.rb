@@ -33,13 +33,13 @@ begin
   driver.find_element(:id => "text_length").send_keys apply_comment
   driver.find_element(:class => "fade").find_element(:tag_name => "button").click
 
-  sleep 3
-
   logger.info("Confirm")
-  driver.find_element(:class => "fade").find_element(:tag_name => "button").click
+  driver.find_elements(:class => "fade")[1].find_element(:tag_name => "button").click
 
   sleep 5
-  logger.info(driver.find_element(:id => "content").text)
+  logger.info(
+      driver.find_element(:id => "content")
+                  .find_elements(:tag_name => "img")[1].attribute("alt"))
 
 rescue => e
     puts e
