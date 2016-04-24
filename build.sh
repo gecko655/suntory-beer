@@ -1,1 +1,1 @@
-docker build -t gecko655/everyday-birthday .
+docker build -t gecko655/suntory-beer .

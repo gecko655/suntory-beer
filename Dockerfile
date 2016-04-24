@@ -18,6 +18,6 @@ Run bundle install
 COPY crontab.config crontab.config
 RUN (crontab -l; cat crontab.config ) | crontab
 
-COPY everyday-birthday.rb /root
+COPY suntory-beer.rb /root
 
 CMD env > /root/env.txt && cron && tail -f /tmp/cronlog.log
