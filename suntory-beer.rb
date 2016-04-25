@@ -8,6 +8,11 @@ twitterID = ENV["TwitterID"]
 password = ENV["Password"]
 apply_comment = "香風智乃さん"
 
+twitterForNotifyConsumerKey = ENV["TwitterForNotifyConsumerKey"]
+twitterForNotifyConsumerSecret = ENV["TwitterForNotifyConsumerSecret"]
+twitterForNotifyAccessToken = ENV["TwitterForNotifyAccessToken"]
+twitterForNotifyAccessTokenSecret = ENV["TwitterForNotifyAccessTokenSecret"]
+
 logger.info("Initializing")
 driver = Selenium::WebDriver.for :remote, :url => "http://"+hostname+":4444/wd/hub", :desired_capabilities => :chrome
 begin
@@ -37,9 +42,17 @@ begin
   driver.find_elements(:class => "fade")[1].find_element(:tag_name => "button").click
 
   sleep 5
-  logger.info(
-      driver.find_element(:id => "content")
-                  .find_elements(:tag_name => "img")[1].attribute("alt"))
+
+  client = Twitter::REST::Client.new do |config|
+    config.consumer_key = twitterForNotifyConsumerKey
+    config.consumer_secret = twitterForNotifyConsumerSecret
+    config.access_token = twitterForNotifyAccessToken
+    config.access_token_secret = twitterForNotifyAccessTokenSecret
+  end
+  result_string = driver.find_element(:id => "content")
+      .find_elements(:tag_name => "img")[1].attribute("alt")
+  client.update("@"+twitterID+" "+ result_string)
+  logger.info(result_string)
 
 rescue => e
     puts e
