@@ -1,6 +1,6 @@
 require 'selenium-webdriver'
 require 'logger'
-require_relative 'result-notify'
+require_relative 'result-notify.rb'
 
 
 logger = Logger.new(STDOUT)
