@@ -1,3 +1,5 @@
+require 'twitter'
+
 class ResultNotify
   CONSUMER_KEY = ENV["ConsumerKey"]
   CONSUMER_SECRET = ENV["ConsumerSecret"]
