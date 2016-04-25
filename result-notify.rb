@@ -14,6 +14,6 @@ class ResultNotify
   end
 
   def self.notify(message, account)
-    client.update("@"+account+" "+ message)
+    @@client.update("@"+account+" "+ message)
   end
 end
