@@ -22,5 +22,6 @@ COPY secretenvs /root/secretenvs
 COPY apply_for_account.sh /root
 
 COPY suntory-beer.rb /root
+COPY result-notify.rb /root
 
 CMD env > /root/env.txt && cron && tail -f /tmp/cronlog.log
