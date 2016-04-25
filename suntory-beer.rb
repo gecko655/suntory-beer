@@ -1,5 +1,7 @@
-require "selenium-webdriver"
+require 'selenium-webdriver'
 require 'logger'
+require_relative 'result-notify'
+
 
 logger = Logger.new(STDOUT)
 
@@ -8,10 +10,7 @@ twitterID = ENV["TwitterID"]
 password = ENV["Password"]
 apply_comment = "香風智乃さん"
 
-twitterForNotifyConsumerKey = ENV["TwitterForNotifyConsumerKey"]
-twitterForNotifyConsumerSecret = ENV["TwitterForNotifyConsumerSecret"]
-twitterForNotifyAccessToken = ENV["TwitterForNotifyAccessToken"]
-twitterForNotifyAccessTokenSecret = ENV["TwitterForNotifyAccessTokenSecret"]
+
 
 logger.info("Initializing")
 driver = Selenium::WebDriver.for :remote, :url => "http://"+hostname+":4444/wd/hub", :desired_capabilities => :chrome
@@ -43,15 +42,9 @@ begin
 
   sleep 5
 
-  client = Twitter::REST::Client.new do |config|
-    config.consumer_key = twitterForNotifyConsumerKey
-    config.consumer_secret = twitterForNotifyConsumerSecret
-    config.access_token = twitterForNotifyAccessToken
-    config.access_token_secret = twitterForNotifyAccessTokenSecret
-  end
   result_string = driver.find_element(:id => "content")
       .find_elements(:tag_name => "img")[1].attribute("alt")
-  client.update("@"+twitterID+" "+ result_string)
+  ResultNotify.notify(result_string,twitterID)
   logger.info(result_string)
 
 rescue => e
