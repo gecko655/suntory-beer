@@ -17,16 +17,13 @@ driver = Selenium::WebDriver.for :remote, :url => "http://"+hostname+":4444/wd/h
 begin
   driver.manage.timeouts.implicit_wait = 10
 
-  logger.info("Accessing to https://premiumcp-coupon.jp/kaoruale/attestation.html")
-  driver.navigate.to "https://premiumcp-coupon.jp/kaoruale/attestation.html"
+  logger.info("Accessing to http://p-strong5gv.jp/i/")
+  driver.navigate.to "http://p-strong5gv.jp/i/"
 
-  logger.info("age check")
-  twenty_button = driver.find_element(:class => "ade")
-  twenty_button.click
-
-  logger.info("Select twitter to apply")
-  apply_with_twitter = driver.find_element(:class => "fade")
-  apply_with_twitter.click
+  logger.info("Agree policy")
+  driver.find_element(:xpath => "//input[@type='checkbox']").click
+  driver.find_element(:xpath => "//button[@class='btn hover']").click
+  
 
   logger.info("Twitter authentication")
   driver.find_element(:id => "username_or_email").send_keys twitterID
@@ -34,18 +31,18 @@ begin
   driver.find_element(:id => "allow").click
 
   logger.info("Input apply comment")
-  driver.find_element(:id => "text_length").send_keys apply_comment
-  driver.find_element(:class => "fade").find_element(:tag_name => "button").click
+  driver.find_element(:id => "tweetText").send_keys apply_comment
+  driver.find_element(:xpath => "//button[@class='btn hover']").click
 
   logger.info("Confirm")
-  driver.find_elements(:class => "fade")[1].find_element(:tag_name => "button").click
+  driver.find_element(:xpath => "//button[@class='btn hover']").click
 
   sleep 5
 
-  result_string = driver.find_element(:id => "content")
-      .find_elements(:tag_name => "img")[1].attribute("alt")
-  ResultNotify.notify(result_string,twitterID)
-  logger.info(result_string)
+  result_pic = driver.find_element(:class => "result-pic")
+  img_url = result_pic["src"] 
+  logger.info(img_url)
+  ResultNotify.notify(img_url,twitterID)
 
 rescue => e
     puts e
