@@ -47,7 +47,7 @@ begin
   sleep 5
 
   result_string = driver.find_element(:class => "lottery")
-      .find_elements(:tag_name => "img").attribute("src")
+      .find_element(:tag_name => "img").attribute("src")
   ResultNotify.notify(result_string,twitterID)
   logger.info(result_string)
 
