@@ -45,6 +45,8 @@ begin
   driver.find_elements(:class => "fade")[1].click
 
   sleep 5
+  wait_trigger=driver.find_element(:class => "result-tit")
+  result-tit
 
   result_string = driver.find_element(:class => "lottery")
       .find_element(:tag_name => "img").attribute("src")
