@@ -46,7 +46,6 @@ begin
 
   sleep 5
   wait_trigger=driver.find_element(:class => "result-tit")
-  result-tit
 
   result_string = driver.find_element(:class => "lottery")
       .find_element(:tag_name => "img").attribute("src")
