@@ -17,15 +17,11 @@ driver = Selenium::WebDriver.for :remote, :url => "http://"+hostname+":4444/wd/h
 begin
   driver.manage.timeouts.implicit_wait = 10
 
-  logger.info("Accessing to https://premiumcp-coupon.jp/mastersdream/attestation.html")
-  driver.navigate.to "https://premiumcp-coupon.jp/mastersdream/attestation.html"
+  logger.info("Accessing to https://boss-cp.jp")
+  driver.navigate.to "https://boss-cp.jp"
 
   logger.info("age check")
-  twenty_button = driver.find_element(:class => "fade")
-  twenty_button.click
-
-  logger.info("agreement check")
-  twenty_button = driver.find_element(:id => "agreement")
+  twenty_button = driver.find_element(:id => "check")
   twenty_button.click
 
   logger.info("Select twitter to apply")
@@ -39,16 +35,15 @@ begin
 
   logger.info("Input apply comment")
   driver.find_element(:id => "text_length").send_keys apply_comment
-  driver.find_element(:class => "fade").click
+  driver.find_elements(:tag_name => "button")[0].click
 
   logger.info("Confirm")
   driver.find_elements(:class => "fade")[1].click
 
   sleep 5
-  wait_trigger=driver.find_element(:class => "result-tit")
 
-  result_string = driver.find_element(:class => "lottery")
-      .find_element(:tag_name => "img").attribute("src")
+  result_string = driver.find_element(:class => "group")
+      .find_elements(:tag_name => "img")[0].attribute("src")
   ResultNotify.notify(result_string,twitterID)
   logger.info(result_string)
 
