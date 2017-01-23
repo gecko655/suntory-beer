@@ -42,7 +42,7 @@ begin
   driver.find_elements(:tag_name => "button")[0].click
 
   logger.info("Confirm")
-  driver.find_elements(:tag_name => "button")[0].click
+  driver.find_element(:class => "btnbox").find_elements(:tag_name => "img")[1].click
 
   sleep 10
 
