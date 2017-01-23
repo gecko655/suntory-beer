@@ -17,19 +17,19 @@ driver = Selenium::WebDriver.for :remote, :url => "http://"+hostname+":4444/wd/h
 begin
   driver.manage.timeouts.implicit_wait = 10
 
-  logger.info("Accessing to http://premiumcp.jp/")
-  driver.navigate.to "http://premiumcp.jp/"
+  logger.info("Accessing to http://s.196cp.jp/")
+  driver.navigate.to "http://s.196cp.jp/"
 
   logger.info("age check")
   twenty_button = driver.find_element(:id => "ac_modal_btn_yes")
   twenty_button.click
 
   logger.info("agree")
-  twenty_button = driver.find_element(:name => "agree")
+  twenty_button = driver.find_element(:id => "agreement")
   twenty_button.click
 
   logger.info("Select twitter to apply")
-  apply_with_twitter = driver.find_elements(:name => "action")[0]
+  apply_with_twitter = driver.find_elements(:class => "fade")[0]
   apply_with_twitter.click
 
   logger.info("Twitter authentication")
@@ -38,7 +38,7 @@ begin
   driver.find_element(:id => "allow").click
 
   logger.info("Input apply comment")
-  driver.find_element(:id => "text_length").send_keys apply_comment
+  driver.find_element(:id => "tweetText").send_keys apply_comment
   driver.find_elements(:tag_name => "button")[0].click
 
   logger.info("Confirm")
@@ -46,7 +46,7 @@ begin
 
   sleep 10
 
-  result_string = driver.find_element(:class => "img")
+  result_string = driver.find_element(:id => "content")
       .find_elements(:tag_name => "img")[0].attribute("src")
   logger.info(result_string)
   ResultNotify.notify(result_string,twitterID)
