@@ -36,6 +36,7 @@ begin
   driver.find_element(:id => "username_or_email").send_keys twitterID
   driver.find_element(:id => "password").send_keys password
   driver.find_element(:id => "allow").click
+  sleep 3
 
   logger.info("Input apply comment")
   driver.find_element(:id => "tweetText").send_keys apply_comment
